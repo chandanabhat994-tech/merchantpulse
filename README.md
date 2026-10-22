@@ -2,7 +2,7 @@
 
 **The Autonomous Merchant Operations Teammate** — from payment problems to verified resolutions.
 
-Paytm Hackathon · Track 3 (Autonomous AI Teammates). Presented by Bhargav Hathwar G & Team.
+Paytm Hackathon · Track 3 (Autonomous AI Teammates)
 
 > **Prototype scope:** synthetic payment records and mock APIs only. It is not integrated with Paytm production systems.
 
