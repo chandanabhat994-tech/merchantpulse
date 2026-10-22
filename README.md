@@ -4,6 +4,8 @@
 
 Paytm Hackathon · Track 3 (Autonomous AI Teammates)
 
+**Check out**: https://merchantpulse.onrender.com
+
 > **Prototype scope:** synthetic payment records and mock APIs only. It is not integrated with Paytm production systems.
 
 ## What it does
