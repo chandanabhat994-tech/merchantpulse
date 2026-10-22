@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MerchantPulse AI</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand">
+      <h1>MerchantPulse AI</h1>
+      <p>Investigates a payment problem, acts within policy, then checks the result.</p>
+    </div>
+    <span class="pill">Synthetic data · mock APIs</span>
+  </header>
+
+  <dl class="figures" id="metrics" aria-label="Evaluation figures"></dl>
+
+  <main class="layout">
+    <aside class="intake" aria-label="Start an investigation">
+      <form id="chat-form">
+        <label for="message" class="field-label">Describe the problem</label>
+        <textarea id="message" rows="4" maxlength="2000" placeholder="Customer paid ₹2,500 for TXN1001 but it is missing. M001"></textarea>
+        <button type="submit" class="primary">Investigate</button>
+      </form>
+
+      <div class="samples" role="group" aria-label="Example problems">
+        <button type="button" data-sample="Customer paid ₹2,500 for TXN1001 but it is missing. M001">Missing payment</button>
+        <button type="button" data-sample="Please refund TXN1002, the customer wants their money back">Refund request</button>
+        <button type="button" data-sample="TXN1004 money not received, urgent">Risk hold</button>
+        <button type="button" data-sample="TXN1003 failed but customer says they were charged">Failed payment</button>
+        <button type="button" data-sample="Check status of TXN1006">Status check</button>
+        <button type="button" data-sample="Money missing, please help">No reference</button>
+      </div>
+
+      <h2 class="section-title">Recent cases</h2>
+      <ul id="case-list" class="case-list"></ul>
+
+      <details class="tools">
+        <summary>Demo controls</summary>
+        <p>Make the next ticket creation fail once, to show the agent retrying safely.</p>
+        <div class="tool-row">
+          <button id="inject" type="button">Fail next ticket</button>
+          <button id="reset" type="button" class="quiet">Reset demo data</button>
+        </div>
+        <p id="demo-status" class="muted" aria-live="polite"></p>
+      </details>
+    </aside>
+
+    <section class="case" aria-labelledby="case-title">
+      <h2 id="case-title" class="visually-hidden">Case investigation</h2>
+      <div id="case-view" aria-live="polite">
+        <div class="empty">
+          <p class="empty-title">Describe a payment problem to start.</p>
+          <p class="muted">Include the transaction ID if you have it. Without one, the agent asks for it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="records" aria-labelledby="records-title">
+      <details>
+        <summary id="records-title">Synthetic records</summary>
+        <div id="data"></div>
+      </details>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

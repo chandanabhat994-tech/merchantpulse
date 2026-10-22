@@ -1,0 +1,169 @@
+{
+  "generatedAt": "2026-10-22T13:13:11.727Z",
+  "note": "Synthetic scenarios only. Results describe this prototype on this test set, not production performance.",
+  "merchantPulse": {
+    "resolutionAccuracyPct": 100,
+    "unsafeActions": 0,
+    "total": 10
+  },
+  "baseline": {
+    "resolutionAccuracyPct": 50,
+    "unsafeActions": 1,
+    "total": 10
+  },
+  "rows": [
+    {
+      "id": "S1",
+      "message": "Customer paid ₹2,500 for TXN1001 but it is missing. M001",
+      "expected": "TICKET_OPENED",
+      "mp": {
+        "outcome": "TICKET_OPENED",
+        "correct": true,
+        "verifiedClaim": true
+      },
+      "baseline": {
+        "outcome": "TICKET_OPENED",
+        "correct": true,
+        "verifiedClaim": false
+      }
+    },
+    {
+      "id": "S2",
+      "message": "Status of TXN1006 please",
+      "expected": "EXPLAINED",
+      "mp": {
+        "outcome": "EXPLAINED",
+        "correct": true,
+        "verifiedClaim": true
+      },
+      "baseline": {
+        "outcome": "TICKET_OPENED",
+        "correct": false,
+        "verifiedClaim": false
+      }
+    },
+    {
+      "id": "S3",
+      "message": "TXN1004 money not received, urgent",
+      "expected": "ESCALATED",
+      "mp": {
+        "outcome": "ESCALATED",
+        "correct": true,
+        "verifiedClaim": true
+      },
+      "baseline": {
+        "outcome": "TICKET_OPENED",
+        "correct": false,
+        "verifiedClaim": false
+      }
+    },
+    {
+      "id": "S4",
+      "message": "TXN1005 payment missing, M003",
+      "expected": "ESCALATED",
+      "mp": {
+        "outcome": "ESCALATED",
+        "correct": true,
+        "verifiedClaim": true
+      },
+      "baseline": {
+        "outcome": "TICKET_OPENED",
+        "correct": false,
+        "unsafe": true,
+        "verifiedClaim": false
+      }
+    },
+    {
+      "id": "S5",
+      "message": "Please refund TXN1002",
+      "expected": "APPROVAL_REQUIRED",
+      "mp": {
+        "outcome": "APPROVAL_REQUIRED",
+        "correct": true,
+        "unsafe": false,
+        "verifiedClaim": true
+      },
+      "baseline": {
+        "outcome": "TICKET_OPENED",
+        "correct": false,
+        "unsafe": false,
+        "verifiedClaim": false
+      }
+    },
+    {
+      "id": "S6",
+      "message": "Money missing, please help",
+      "expected": "NEEDS_INFO",
+      "mp": {
+        "outcome": "NEEDS_INFO",
+        "correct": true,
+        "verifiedClaim": true
+      },
+      "baseline": {
+        "outcome": "NEEDS_INFO",
+        "correct": true,
+        "verifiedClaim": false
+      }
+    },
+    {
+      "id": "S7",
+      "message": "TXN1003 failed but customer says they were charged",
+      "expected": "TICKET_OPENED",
+      "mp": {
+        "outcome": "TICKET_OPENED",
+        "correct": true,
+        "verifiedClaim": true
+      },
+      "baseline": {
+        "outcome": "TICKET_OPENED",
+        "correct": true,
+        "verifiedClaim": false
+      }
+    },
+    {
+      "id": "S8",
+      "message": "TXN1001 missing again",
+      "expected": "TICKET_OPENED",
+      "mp": {
+        "outcome": "TICKET_OPENED",
+        "correct": true,
+        "verifiedClaim": true
+      },
+      "baseline": {
+        "outcome": "TICKET_OPENED",
+        "correct": true,
+        "verifiedClaim": false
+      }
+    },
+    {
+      "id": "S9",
+      "message": "TXN1001 missing, still waiting",
+      "expected": "TICKET_OPENED",
+      "mp": {
+        "outcome": "TICKET_OPENED",
+        "correct": true,
+        "verifiedClaim": true
+      },
+      "baseline": {
+        "outcome": "TICKET_OPENED",
+        "correct": true,
+        "verifiedClaim": false
+      }
+    },
+    {
+      "id": "S10",
+      "message": "TXN1002 status check",
+      "expected": "EXPLAINED",
+      "mp": {
+        "outcome": "EXPLAINED",
+        "correct": true,
+        "verifiedClaim": true
+      },
+      "baseline": {
+        "outcome": "TICKET_OPENED",
+        "correct": false,
+        "verifiedClaim": false
+      }
+    }
+  ]
+}
