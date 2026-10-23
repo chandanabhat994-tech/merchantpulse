@@ -30,19 +30,7 @@ npm test             # 21 unit + HTTP tests
 npm run eval         # scenario accuracy vs. a naive baseline -> data/eval-report.json
 ```
 
-Optional environment variables:
-
-| Variable | Default | Purpose |
-|---|---|---|
-| `PORT` | `3000` | HTTP port |
-| `LLM_PROVIDER` | `rules` | `ollama` to use a local model for planning |
-| `OLLAMA_URL` | `http://localhost:11434` | Ollama endpoint |
-| `OLLAMA_MODEL` | `llama3.1` | Any locally pulled model |
-| `LLM_TIMEOUT_MS` | `8000` | Planner timeout before falling back to rules |
-| `RETRY_DELAY_MS` | `200` | Backoff between ticket-creation retries |
-| `CASES_FILE` | `data/cases.json` | Where cases and audit logs are persisted |
-
-## Demo script (3 minutes)
+## Demo script 
 
 1. **Intake:** "Customer paid ₹2,500 for TXN1001 but it is missing. M001" → case created, merchant and transaction identified.
 2. **Investigation:** timeline shows read calls, and the settlement lookup finds no link.
@@ -75,23 +63,6 @@ Optional environment variables:
 | POST | `/api/demo/inject-failure` | `{ "op": "createTicket", "times": 1 }` |
 | POST | `/api/demo/reset` | Restore seed data and clear cases |
 
-## Project layout
-
-```
-src/
-  app.js                 Express app factory (routes)
-  server.js              Entrypoint
-  mock/                  Synthetic seed data + mock payment API (with failure injection)
-  agent/
-    understand.js        Identifier and intent extraction
-    planner.js           Deterministic rule planner
-    llmPlanner.js        Optional Ollama planner with strict allowlist validation
-    policy.js            Deterministic permission engine
-    caseRunner.js        Investigate → plan → policy → act → verify → reply
-    store.js             Case and audit persistence
-public/                  Dashboard (chat, timeline, evidence, approvals, metrics)
-tests/                   node:test suites
-scripts/evaluate.js      Scenario evaluation vs. baseline
 ```
 
 ## Deviations from the draft's stack
