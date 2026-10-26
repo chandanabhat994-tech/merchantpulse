@@ -1,5 +1,6 @@
 import express from 'express';
 import { fileURLToPath } from 'node:url';
+import { readFile } from 'node:fs/promises';
 import { MockPaymentApi } from './mock/mockPaymentApi.js';
 import { CaseStore } from './agent/store.js';
 import { runCase, decideApproval } from './agent/caseRunner.js';
@@ -75,6 +76,16 @@ export function createApp({ api = new MockPaymentApi(), store = new CaseStore(),
       transientFailuresRecovered: recovered,
       unverifiedClaims: 0, // by design: UNVERIFIED outcomes are never reported as success
     });
+  });
+
+  app.get('/api/evaluation', async (_req, res) => {
+    try {
+      const p = fileURLToPath(new URL('../data/eval-report.json', import.meta.url));
+      const raw = await readFile(p, 'utf-8');
+      res.json(JSON.parse(raw));
+    } catch {
+      res.status(404).json({ error: 'Evaluation report not found. Run npm run eval to generate.' });
+    }
   });
 
   // Demo controls (synthetic environment only)

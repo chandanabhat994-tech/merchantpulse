@@ -1,74 +1,263 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MerchantPulse AI</title>
-  <link rel="icon" href="data:,">
+  <title>MerchantPulse AI — Autonomous Merchant Operations Teammate</title>
+  <meta name="description" content="Autonomous merchant-support teammate that investigates payment discrepancies, enforces policy, and verifies resolutions before reporting success.">
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow glow-2" aria-hidden="true"></div>
+
+  <!-- App Header -->
   <header class="masthead">
-    <div class="brand">
-      <h1>MerchantPulse AI</h1>
-      <p>Investigates a payment problem, acts within policy, then checks the result.</p>
+    <div class="brand-cluster">
+      <div class="logo-container">
+        <img src="logo.jpg" alt="MerchantPulse AI Logo" class="brand-logo" width="38" height="38">
+        <span class="live-dot" title="Autonomous AI Agent Active"></span>
+      </div>
+      <div>
+        <div class="brand-title-row">
+          <h1 class="brand-name">MerchantPulse <span class="brand-badge">AI</span></h1>
+          <span class="track-badge">Paytm Hackathon · Track 3</span>
+        </div>
+        <p class="brand-tagline">Autonomous merchant operations teammate · Investigates, enforces policy &amp; confirms backend truth.</p>
+      </div>
     </div>
-    <span class="pill">Synthetic data · mock APIs</span>
+
+    <div class="header-actions">
+      <div class="system-status-pill" title="Deterministic Guardrails Active">
+        <span class="status-indicator"></span>
+        <span class="status-label" id="agent-mode-label">Policy Guardrails: Enforced</span>
+      </div>
+
+      <button type="button" class="btn-ghost" id="open-eval-btn" title="View Evaluation Benchmark">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        <span>Benchmark</span>
+        <span class="mini-pill">100%</span>
+      </button>
+
+      <button type="button" class="btn-ghost" id="open-db-btn" title="Inspect Synthetic Database">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        <span>Records</span>
+      </button>
+
+      <button type="button" class="btn-icon" id="sound-toggle-btn" title="Toggle Sound Feedback" aria-label="Toggle sound feedback">
+        <svg class="sound-on" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        <svg class="sound-off hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+      </button>
+
+      <button type="button" class="btn-icon" id="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle theme">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="moon-icon hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
   </header>
 
-  <dl class="figures" id="metrics" aria-label="Evaluation figures"></dl>
+  <!-- Executive Metric Strip -->
+  <section class="metrics-bar" aria-label="Executive Performance Metrics">
+    <div class="metrics-grid" id="metrics">
+      <div class="metric-card loading"><div class="metric-shimmer"></div></div>
+      <div class="metric-card loading"><div class="metric-shimmer"></div></div>
+      <div class="metric-card loading"><div class="metric-shimmer"></div></div>
+      <div class="metric-card loading"><div class="metric-shimmer"></div></div>
+      <div class="metric-card loading"><div class="metric-shimmer"></div></div>
+      <div class="metric-card loading"><div class="metric-shimmer"></div></div>
+    </div>
+  </section>
 
-  <main class="layout">
-    <aside class="intake" aria-label="Start an investigation">
-      <form id="chat-form">
-        <label for="message" class="field-label">Describe the problem</label>
-        <textarea id="message" rows="4" maxlength="2000" placeholder="Customer paid ₹2,500 for TXN1001 but it is missing. M001"></textarea>
-        <button type="submit" class="primary">Investigate</button>
-      </form>
-
-      <div class="samples" role="group" aria-label="Example problems">
-        <button type="button" data-sample="Customer paid ₹2,500 for TXN1001 but it is missing. M001">Missing payment</button>
-        <button type="button" data-sample="Please refund TXN1002, the customer wants their money back">Refund request</button>
-        <button type="button" data-sample="TXN1004 money not received, urgent">Risk hold</button>
-        <button type="button" data-sample="TXN1003 failed but customer says they were charged">Failed payment</button>
-        <button type="button" data-sample="Check status of TXN1006">Status check</button>
-        <button type="button" data-sample="Money missing, please help">No reference</button>
-      </div>
-
-      <h2 class="section-title">Recent cases</h2>
-      <ul id="case-list" class="case-list"></ul>
-
-      <details class="tools">
-        <summary>Demo controls</summary>
-        <p>Make the next ticket creation fail once, to show the agent retrying safely.</p>
-        <div class="tool-row">
-          <button id="inject" type="button">Fail next ticket</button>
-          <button id="reset" type="button" class="quiet">Reset demo data</button>
+  <!-- Main Application Workspace -->
+  <main class="main-layout">
+    <!-- Left Navigation & Intake Rail -->
+    <aside class="sidebar" aria-label="Investigation Intake and History">
+      <!-- Intake Form Card -->
+      <section class="card intake-card">
+        <div class="card-header">
+          <div class="header-icon-title">
+            <svg class="card-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <h2>Describe Problem</h2>
+          </div>
+          <span class="badge-subtle">Natural Speech</span>
         </div>
-        <p id="demo-status" class="muted" aria-live="polite"></p>
-      </details>
+
+        <form id="chat-form" class="intake-form">
+          <div class="textarea-wrapper">
+            <textarea
+              id="message"
+              rows="3"
+              maxlength="2000"
+              placeholder="e.g. Customer paid ₹2,500 for TXN1001 but it is missing. M001"
+              aria-label="Describe merchant payment issue"
+            ></textarea>
+            <div class="textarea-footer">
+              <span class="char-count" id="char-count">0/2000</span>
+              <span class="kbd-hint"><kbd>⌘</kbd> + <kbd>↵</kbd></span>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary" id="investigate-btn">
+            <svg class="btn-icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span>Investigate Case</span>
+          </button>
+        </form>
+
+        <!-- Quick Scenarios -->
+        <div class="scenarios-section">
+          <label class="section-sublabel">Example Scenarios</label>
+          <div class="samples-grid" role="group" aria-label="Preconfigured test scenarios">
+            <button type="button" class="sample-btn" data-sample="Customer paid ₹2,500 for TXN1001 but it is missing. M001" title="Missing settlement link">
+              <span class="sample-tag ok">⚡ Missing settlement</span>
+              <span class="sample-label">TXN1001 · ₹2,500</span>
+            </button>
+            <button type="button" class="sample-btn" data-sample="Please refund TXN1002, the customer wants their money back" title="Triggers human-in-the-loop financial approval">
+              <span class="sample-tag wait">💳 Refund review</span>
+              <span class="sample-label">TXN1002 · ₹1,200</span>
+            </button>
+            <button type="button" class="sample-btn" data-sample="TXN1004 money not received, urgent" title="Escalates due to settlement on risk hold">
+              <span class="sample-tag alert">⚠️ Risk hold</span>
+              <span class="sample-label">TXN1004 · ₹3,100</span>
+            </button>
+            <button type="button" class="sample-btn" data-sample="TXN1003 failed but customer says they were charged" title="Customer debited on gateway-failed txn">
+              <span class="sample-tag fail">❌ Failed payment</span>
+              <span class="sample-label">TXN1003 · ₹4,800</span>
+            </button>
+            <button type="button" class="sample-btn" data-sample="Check status of TXN1006" title="Recent pending transaction">
+              <span class="sample-tag info">ℹ️ Status check</span>
+              <span class="sample-label">TXN1006 · ₹750</span>
+            </button>
+            <button type="button" class="sample-btn" data-sample="Money missing, please help" title="Missing transaction reference">
+              <span class="sample-tag neutral">❓ No reference</span>
+              <span class="sample-label">Needs info flow</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent Cases Feed -->
+      <section class="card cases-feed-card">
+        <div class="card-header">
+          <div class="header-icon-title">
+            <svg class="card-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <h2>Recent Cases</h2>
+          </div>
+          <span class="count-badge" id="case-count-badge">0</span>
+        </div>
+        <ul id="case-list" class="case-list" aria-label="List of recent investigated cases"></ul>
+      </section>
+
+      <!-- Demo Failure Injection & Reset Controls -->
+      <section class="card demo-controls-card">
+        <div class="card-header collapsible-trigger" id="demo-toggle-trigger">
+          <div class="header-icon-title">
+            <svg class="card-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            <h2>Demo &amp; Chaos Controls</h2>
+          </div>
+          <span class="collapse-icon">▾</span>
+        </div>
+        <div class="demo-controls-body" id="demo-controls-content">
+          <p class="card-description">Simulate external API transient failure to demonstrate autonomous retry, idempotent deduplication, and zero-loss recovery.</p>
+          <div class="demo-btn-group">
+            <button id="inject" type="button" class="btn-warning">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Inject 1x Ticket Failure</span>
+            </button>
+            <button id="reset" type="button" class="btn-subtle">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              <span>Reset Seed State</span>
+            </button>
+          </div>
+          <div id="demo-status" class="demo-status-toast" aria-live="polite"></div>
+        </div>
+      </section>
     </aside>
 
-    <section class="case" aria-labelledby="case-title">
-      <h2 id="case-title" class="visually-hidden">Case investigation</h2>
-      <div id="case-view" aria-live="polite">
-        <div class="empty">
-          <p class="empty-title">Describe a payment problem to start.</p>
-          <p class="muted">Include the transaction ID if you have it. Without one, the agent asks for it.</p>
+    <!-- Center Stage: Investigation Studio -->
+    <section class="investigation-stage" aria-label="Investigation Studio">
+      <div id="case-view" class="case-container" aria-live="polite">
+        <!-- Rendered dynamically by app.js -->
+        <div class="empty-state">
+          <div class="empty-art">
+            <div class="empty-pulse-circle">
+              <img src="logo.jpg" alt="MerchantPulse Logo" width="64" height="64" class="pulse-logo">
+            </div>
+          </div>
+          <h2 class="empty-title">Ready for Merchant Operations</h2>
+          <p class="empty-subtitle">Describe a payment discrepancy on the left, or click any sample scenario to see the autonomous agent investigate, check policies, and verify outcomes against backend records.</p>
+          <div class="empty-features">
+            <div class="feature-pill">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Strict Policy Guardrails</span>
+            </div>
+            <div class="feature-pill">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span>Verified Resolutions Only</span>
+            </div>
+            <div class="feature-pill">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>Human-in-the-Loop Refunds</span>
+            </div>
+            <div class="feature-pill">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+              <span>Idempotent Self-Healing</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-
-    <section class="records" aria-labelledby="records-title">
-      <details>
-        <summary id="records-title">Synthetic records</summary>
-        <div id="data"></div>
-      </details>
-    </section>
   </main>
+
+  <!-- Modal: Evaluation Benchmark -->
+  <dialog id="eval-modal" class="app-modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="badge-tag ok">Synthetic Benchmark</span>
+          <h2>MerchantPulse vs Naive Baseline</h2>
+          <p class="modal-subtitle">10 labelled scenarios testing safety policy, deduplication, retry recovery, and truth verification.</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="close-eval-modal" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="modal-body" id="eval-content">
+        <div class="eval-loading">Loading benchmark results…</div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Drawer / Modal: Synthetic Database Explorer -->
+  <dialog id="db-modal" class="app-modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card wide-modal">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="badge-tag info">Live Synthetic Store</span>
+          <h2>Payment Records &amp; State</h2>
+          <p class="modal-subtitle">Click on any transaction ID to test it in the investigation studio.</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="close-db-modal" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="db-tabs">
+          <button type="button" class="db-tab-btn active" data-dbtab="transactions">Transactions (6)</button>
+          <button type="button" class="db-tab-btn" data-dbtab="settlements">Settlements (3)</button>
+          <button type="button" class="db-tab-btn" data-dbtab="merchants">Merchants (3)</button>
+          <button type="button" class="db-tab-btn" data-dbtab="tickets">Support Tickets</button>
+        </div>
+        <div id="db-content" class="db-tables-wrap"></div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
   <script src="app.js"></script>
 </body>
